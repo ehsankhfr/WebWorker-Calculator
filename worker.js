@@ -1,20 +1,49 @@
-const WORKER_EXIT = "WE";
+const MESSAGES = {
+  WORKER_EXIT : "WE",
+  CALCULATE: "calculate",
+  INIT : "init"
+};
 
-onmessage = function(e) {
+let ChildDT = null;
+let child  = null;
+
+const loadChild = (ChildDT)=>{
+    if(!ChildDT){
+      importScripts('./child.js');
+    }
+};
+
+const sendMessage = (message, payload = [])=>{
+    console.log(`message: ${message}, payload: ${payload}`);
+
+    if(typeof message === "string"){
+        postMessage({message,payload});
+    }else{
+        // in case of returning the received data back
+        postMessage(message);
+    }
+}
+
+onmessage = (e)=> {
   console.log('Message received from main script');
-  if(e.data.map(v=>v.toUpperCase()).indexOf(WORKER_EXIT) > -1){
-      close();
-      console.log(`Terminating worker by ${WORKER_EXIT}`);
-  }else{
-      let result = e.data.reduce((total,v)=>total*v,1);
-      result = !!result ? result : 0;
-      var workerResult = `Result: ${result}`;
-      console.log('Posting message back to main script');
-      postMessage(workerResult);
-      importScripts('hehe.js');
+  if(e.data && e.data.message){
+    switch(e.data.message){
+        case MESSAGES.WORKER_EXIT:
+            close();
+            break;
+        case MESSAGES.CALCULATE:
+            sendMessage(e.data.message, e.data.payload.reduce((t,v)=>t*v,1));
+            break;
+        case MESSAGES.INIT:
+            loadChild(ChildDT);
+            child = !!child || new Child();
+            setTimeout(()=>sendMessage(e.data), 5000);
+            break;
+    }
   }
+  
 }
 
 onerror = function(value) {
-    console.log(value);
+    console.log(value.message);
 }

@@ -15,9 +15,9 @@
 
   <body>
     <!-- <h1>Web<br>Workers<br>basic<br>example</h1> -->
-
     <div class="controls" tabindex="0">
-
+    <div><span>Status: </span><span id="status"></span><div>
+    
     <form>
       <div>
         <label for="number1">Num1: </label>    
@@ -29,6 +29,11 @@
       </div>
     </form>
 
+      <div>
+        <button id="terminateClient" type="button">Client</button>
+        <button id="terminateWorker" type="button">Worker</button>
+        <button id="reset" type="button">Reset</button>
+      </div>
     <p id="result">Result: 0</p>
 
     </div>
