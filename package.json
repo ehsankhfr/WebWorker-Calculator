@@ -1,20 +1,19 @@
 {
   "name": "simple-web-worker",
   "version": "1.0.0",
-  "description": "A simple web worker test. [View this demo live](http://mdn.github.io/simple-web-worker/).",
+  "description": "An example about how to create a simple calculator with web workers.",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "http-server -o"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mdn/simple-web-worker.git"
+    "url": "git+https://github.com/ehsankhfr/WebWorker-Calculator.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mdn/simple-web-worker/issues"
+    "url": "https://github.com/ehsankhfr/WebWorker-Calculator/issues"
   },
-  "homepage": "https://github.com/mdn/simple-web-worker#readme"
+  "homepage": "https://github.com/ehsankhfr/WebWorker-Calculator#readme"
 }
