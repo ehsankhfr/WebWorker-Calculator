@@ -17,8 +17,11 @@ environment:
 build: 'off'
 matrix:
   fast_finish: true
+# Install scripts. (runs after repo cloning)
 install:
-  - 'ps: Install-Product node $env:nodejs_version x64'
+  # Get the latest stable version of Node.js or io.js
+  - ps: Install-Product node $env:nodejs_version
+  # install modules
   - npm i -g npm@latest
   - npm install
 before_test:
